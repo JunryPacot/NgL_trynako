@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anonymous Messages</title>
+    <style>
+        /* Responsive background styling */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff5858, #f09819);
+            color: #fff;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        /* Developer credit styling */
+        .developer {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .developer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .developer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Logo and title styling */
+        .logo-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .logo-title img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo-title h1 {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* Animated colorful container styling */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            background: linear-gradient(135deg, #ff5858, #f09819);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            text-align: center;
+            color: #333;
+            animation: colorShift 10s infinite linear;
+        }
+
+        /* Keyframes for colorful gradient animation */
+        @keyframes colorShift {
+            0% { background: linear-gradient(135deg, #ff5858, #f09819); }
+            25% { background: linear-gradient(135deg, #fbc2eb, #a18cd1); }
+            50% { background: linear-gradient(135deg, #ff9a9e, #fad0c4); }
+            75% { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+            100% { background: linear-gradient(135deg, #ff5858, #f09819); }
+        }
+
+        /* Form styling */
+        #messageForm {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #messageInput {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            border: 2px solid #ff5858;
+            border-radius: 8px;
+            resize: none;
+            font-size: 16px;
+            margin-bottom: 12px;
+            outline: none;
+        }
+
+        /* Button styling */
+        button {
+            padding: 12px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #ff5858;
+            border: none;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #f09819;
+            transform: scale(1.1);
+        }
+
+        /* Messages display with scrolling */
+        #messageDisplay {
+            margin-top: 20px;
+            max-height: 300px; /* Set fixed height for scrolling */
+            overflow-y: auto;
+            text-align: left;
+            border: 2px solid #ff5858;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            scrollbar-width: thin; /* For Firefox */
+        }
+
+        /* Individual message styling */
+        .message {
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+            color: #333;
+            animation: fadeIn 0.5s ease-in-out; /* Fade-in effect */
+        }
+
+        /* Header in each message */
+        .message-header {
+            font-weight: bold;
+            color: #ff5858;
+            margin-bottom: 6px;
+        }
+
+        /* Smooth fade-in for messages */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Developer credit -->
+    <div class="developer">
+        Developed by <a href="https://www.facebook.com/profile.php?id=100075262125552" target="_blank">Junry Pacot</a>
+    </div>
+
+    <!-- Logo and title -->
+    <div class="logo-title">
+        <img src="NGL.png" alt="NGL Logo">
+        <h1>NGL Anonymous Messages</h1>
+    </div>
+
+    <!-- Main content container -->
+    <div class="container">
+        <!-- Message form -->
+        <form id="messageForm">
+            <textarea id="messageInput" placeholder="Write your message here..." required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+
+        <!-- Messages display -->
+        <div id="messageDisplay">
+            <!-- Messages will appear here -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("messageForm");
+            const messageInput = document.getElementById("messageInput");
+            const messageDisplay = document.getElementById("messageDisplay");
+
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+                const message = messageInput.value.trim();
+
+                if (message) {
+                    displayMessage(message);
+                    messageInput.value = "";
+                }
+            });
+
+            // Function to display the message on the page
+            function displayMessage(message) {
+                const messageElement = document.createElement("div");
+                messageElement.classList.add("message");
+
+                const messageHeader = document.createElement("div");
+                messageHeader.classList.add("message-header");
+                messageHeader.innerText = "Anonymous message sent to Junry Pacot";
+
+                const messageContent = document.createElement("div");
+                messageContent.innerText = message;
+
+                messageElement.appendChild(messageHeader);
+                messageElement.appendChild(messageContent);
+
+                messageDisplay.appendChild(messageElement);
+
+                // Smooth scroll to the latest message
+                messageDisplay.scrollTo({
+                    top: messageDisplay.scrollHeight,
+                    behavior: "smooth"
+                });
+            }
+        });
+    </script>
+</body>
+</html>
